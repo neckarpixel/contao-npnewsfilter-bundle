@@ -7,10 +7,11 @@
 | | |
 |---|---|
 | **Paket** | `neckarpixel/contao-npnewsfilter-bundle` |
-| **Contao** | 4.13 (LTS) |
-| **PHP** | 7.4 oder 8.x |
+| **Contao** | 4.9 LTS · 4.13 LTS · 5.x |
+| **PHP** | 7.2 – 8.x (je nach Contao-Version) |
 | **Lizenz** | LGPL-3.0-or-later |
 | **Autor** | [Neckarpixel](https://www.neckarpixel.de) |
+| **Repository** | [github.com/neckarpixel/contao-npnewsfilter-bundle](https://github.com/neckarpixel/contao-npnewsfilter-bundle) |
 
 ---
 
@@ -61,6 +62,7 @@ Nachrichtenarchiv „Presse“
 - ✅ Funktioniert mit der **Vorschau** (Backend-Benutzer sehen auch unveröffentlichte Nachrichten)
 - ✅ **Hilfe-Assistent** (?) im Backend mit Erklärung jeder Option
 - ✅ Vollständig übersetzt: **Deutsch & Englisch**
+- ✅ **Eine Codebasis für Contao 4.9, 4.13 und 5.x** – keine getrennten Versionen nötig
 - ✅ Kein eigenes Modul, kein Template-Override – die bestehende Nachrichtenliste wird nur erweitert
 - ✅ Leeres Feld = exakt das Contao-Standardverhalten
 
@@ -70,10 +72,34 @@ Nachrichtenarchiv „Presse“
 
 | Komponente | Version |
 |---|---|
-| Contao | `^4.13` |
-| contao/news-bundle | `^4.13` |
-| PHP | `^7.4` oder `^8.0` |
+| Contao | `^4.9` oder `^5.0` |
+| contao/news-bundle | `^4.9` oder `^5.0` |
+| PHP | `^7.2` oder `^8.0` (Contao gibt die tatsächliche Mindestversion vor) |
 | Contao Manager Plugin | `^2.0` |
+
+### Kompatibilität
+
+| Contao-Version | Status | PHP (Vorgabe von Contao) | Hinweis |
+|---|---|---|---|
+| 4.0 – 4.8 | ❌ nicht unterstützt | – | End of Life, bitte updaten |
+| **4.9 LTS** | ✅ unterstützt | 7.2 – 8.0 | |
+| 4.10 – 4.12 | ✅ unterstützt | 7.3 – 8.x | End of Life |
+| **4.13 LTS** | ✅ unterstützt | 7.4 – 8.x | |
+| **5.x** (inkl. 5.3 LTS und neuer) | ✅ unterstützt | ab 8.1 | |
+
+**Warum eine Codebasis für beide Hauptversionen reicht:**
+
+| Baustein | Contao 4.9 / 4.13 | Contao 5.x |
+|---|---|---|
+| Nachrichtenliste | `ModuleNewsList` | `ModuleNewsList` (unverändert) |
+| Hooks `newsListCountItems` / `newsListFetchItems` | ✅ gleiche Signatur | ✅ gleiche Signatur |
+| Sortierung (`news_order`, `featured_first`) | ✅ identisch | ✅ identisch |
+| Vorschau-Erkennung `TokenChecker::isPreviewMode()` | ✅ | ✅ |
+| Ressourcen-Ordner `src/Resources/contao/` | ✅ Standard | ✅ wird weiterhin geladen |
+| Sprachdateien als PHP | ✅ | ✅ |
+| Symfony | 4.4 / 5.4 | 6.4 / 7.x |
+
+> ℹ️ Der Code verwendet bewusst keine PHP-8-Features (Attribute, Constructor Property Promotion, `match`), damit er auch unter Contao 4.9 mit PHP 7.2 läuft.
 
 ---
 
@@ -100,7 +126,7 @@ Dann installieren:
 composer require neckarpixel/contao-npnewsfilter-bundle
 ```
 
-> 💡 **Tipp:** Lege im GitHub-Repository einen Tag an (z. B. `v1.0.0`). Ohne Tag musst du `dev-main` angeben:
+> 💡 **Hinweis:** Installiert wird der neueste Tag (z. B. `v1.0.0`). Ohne Tag musst du `dev-main` angeben:
 > `composer require neckarpixel/contao-npnewsfilter-bundle:dev-main`
 
 ### Variante B – Lokaler Ordner (Path-Repository)
@@ -136,7 +162,7 @@ php vendor/bin/contao-console cache:clear --env=prod
 php vendor/bin/contao-console contao:migrate
 ```
 
-> ⚠️ Bei mehreren PHP-Versionen auf dem Server das passende Binary verwenden, z. B. `php81 vendor/bin/contao-console …`
+> ⚠️ Bei mehreren PHP-Versionen auf dem Server das passende Binary verwenden, z. B. `php74 vendor/bin/contao-console …` (Contao 4) oder `php83 vendor/bin/contao-console …` (Contao 5)
 
 Alternativ: **Contao Manager → Systemwartung → Prod.-Cache neu erzeugen** und anschließend **Datenbank aktualisieren** im Install-Tool bzw. Contao Manager.
 
@@ -144,7 +170,7 @@ Alternativ: **Contao Manager → Systemwartung → Prod.-Cache neu erzeugen** un
 
 ## Konfiguration im Backend
 
-1. **Layout → Themes → Frontend-Module** öffnen
+1. **Layout → Themes → Frontend-Module** öffnen (Contao 4 und 5 identisch)
 2. Ein Modul vom Typ **Nachrichtenliste** bearbeiten oder neu anlegen
 3. Im Bereich **Modul-Konfiguration** direkt unter *Hervorgehobene Nachrichten* erscheint das neue Feld:
 

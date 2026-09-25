@@ -7,10 +7,11 @@
 | | |
 |---|---|
 | **Package** | `neckarpixel/contao-npnewsfilter-bundle` |
-| **Contao** | 4.13 (LTS) |
-| **PHP** | 7.4 or 8.x |
+| **Contao** | 4.9 LTS · 4.13 LTS · 5.x |
+| **PHP** | 7.2 – 8.x (depending on Contao version) |
 | **License** | LGPL-3.0-or-later |
 | **Author** | [Neckarpixel](https://www.neckarpixel.de) |
+| **Repository** | [github.com/neckarpixel/contao-npnewsfilter-bundle](https://github.com/neckarpixel/contao-npnewsfilter-bundle) |
 
 ---
 
@@ -59,6 +60,7 @@ News archive "Press"
 - ✅ Works with **preview mode**
 - ✅ **Help wizard** (?) in the backend explaining every option
 - ✅ Fully translated: **German & English**
+- ✅ **One code base for Contao 4.9, 4.13 and 5.x**
 - ✅ No custom module, no template override
 - ✅ Empty field = exact Contao default behaviour
 
@@ -68,10 +70,22 @@ News archive "Press"
 
 | Component | Version |
 |---|---|
-| Contao | `^4.13` |
-| contao/news-bundle | `^4.13` |
-| PHP | `^7.4` or `^8.0` |
+| Contao | `^4.9` or `^5.0` |
+| contao/news-bundle | `^4.9` or `^5.0` |
+| PHP | `^7.2` or `^8.0` (the actual minimum is set by Contao) |
 | Contao Manager Plugin | `^2.0` |
+
+### Compatibility
+
+| Contao version | Status | PHP (required by Contao) | Note |
+|---|---|---|---|
+| 4.0 – 4.8 | ❌ not supported | – | end of life |
+| **4.9 LTS** | ✅ supported | 7.2 – 8.0 | |
+| 4.10 – 4.12 | ✅ supported | 7.3 – 8.x | end of life |
+| **4.13 LTS** | ✅ supported | 7.4 – 8.x | |
+| **5.x** (incl. 5.3 LTS and newer) | ✅ supported | 8.1+ | |
+
+Why one code base works for both major versions: `ModuleNewsList`, the hooks `newsListCountItems` / `newsListFetchItems` (same signature), the sorting logic, `TokenChecker::isPreviewMode()` and the `src/Resources/contao/` directory are identical in Contao 4.9, 4.13 and 5.x. The code intentionally avoids PHP 8 features so it also runs on PHP 7.2.
 
 ---
 
@@ -96,7 +110,7 @@ Add the repository to the `composer.json` **of your Contao installation**:
 composer require neckarpixel/contao-npnewsfilter-bundle
 ```
 
-> 💡 Create a tag in the repository (e.g. `v1.0.0`). Without a tag use `:dev-main`.
+> 💡 The latest tag is installed (e.g. `v1.0.0`). Without a tag use `:dev-main`.
 
 ### Option B – Local path repository
 

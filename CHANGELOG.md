@@ -15,7 +15,11 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionier
 - Hooks `newsListCountItems` und `newsListFetchItems` – Pagination, Sortierung, Hervorgehoben-Filter und Offset bleiben voll funktionsfähig
 - Hilfe-Assistent (helpwizard) mit Erklärung aller Optionen
 - Übersetzungen Deutsch und Englisch
+- Unterstützung für **Contao 4.9 LTS, 4.10–4.13 und 5.x** (`^4.9 || ^5.0`), PHP `^7.2 || ^8.0`
+- README auf Deutsch und Englisch inkl. Kompatibilitätsmatrix
 
 ### Ersetzt
 
 - Ersetzt den früheren Prototyp `neckarpixel/contao-npnewslist-bundle`
+
+[1.0.0]: https://github.com/neckarpixel/contao-npnewsfilter-bundle/releases/tag/v1.0.0
