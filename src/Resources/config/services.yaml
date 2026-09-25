@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+
+    Neckarpixel\NpnewsfilterBundle\EventListener\NewsListFilterListener:
+        public: true
+        arguments:
+            - '@contao.security.token_checker'
+        tags:
+            - { name: contao.hook, hook: newsListCountItems, method: onNewsListCountItems }
+            - { name: contao.hook, hook: newsListFetchItems, method: onNewsListFetchItems }

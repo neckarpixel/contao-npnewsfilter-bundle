@@ -1,0 +1,45 @@
+{
+    "name": "neckarpixel/contao-npnewsfilter-bundle",
+    "description": "Time filter for the Contao news list module: show only news younger or older than a given period, or from the current/previous month or year.",
+    "type": "contao-bundle",
+    "keywords": [
+        "contao",
+        "news",
+        "newslist",
+        "filter",
+        "date",
+        "archive",
+        "nachrichten",
+        "zeitfilter"
+    ],
+    "homepage": "https://www.neckarpixel.de",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Neckarpixel",
+            "email": "ai@neckarpixel.de",
+            "homepage": "https://www.neckarpixel.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "contao/core-bundle": "^4.13",
+        "contao/news-bundle": "^4.13"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "conflict": {
+        "contao/core": "*",
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Neckarpixel\\NpnewsfilterBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Neckarpixel\\NpnewsfilterBundle\\ContaoManager\\Plugin"
+    }
+}
